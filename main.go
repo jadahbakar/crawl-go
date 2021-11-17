@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"strings"
+	"time"
 
 	"github.com/gocolly/colly/v2"
 	"github.com/gocolly/colly/v2/debug"
@@ -23,7 +24,7 @@ func CrawlLink(url string) []Link {
 	)
 
 	c.OnHTML("a[href]", func(e *colly.HTMLElement) {
-		// time.Sleep(5 * time.Second)
+		time.Sleep(10 * time.Second)
 		link := e.Attr("href")
 		str := strings.TrimSpace(e.Text)
 		result = append(result, Link{url: link, title: str})
@@ -36,7 +37,7 @@ func CrawlLink(url string) []Link {
 }
 
 func main() {
-	data := CrawlLink("https://ssr-assessment.miqdadyyy.vercel.app/")
-	// data := CrawlLink("https://csr-assessment.miqdadyyy.vercel.app/")
+	// data := CrawlLink("https://ssr-assessment.miqdadyyy.vercel.app/")
+	data := CrawlLink("https://csr-assessment.miqdadyyy.vercel.app/")
 	log.Println(data)
 }
